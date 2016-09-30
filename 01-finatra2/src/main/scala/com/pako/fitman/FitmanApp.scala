@@ -47,7 +47,7 @@ class WeightController extends Controller {
         case None => List(weight)
       }
       db.put(weight.user, weigthForUser)
-      response.created.location(s"/weigths/${weight.user}")
+      response.created.location(s"/weight/${weight.user}")
   }
 
 
