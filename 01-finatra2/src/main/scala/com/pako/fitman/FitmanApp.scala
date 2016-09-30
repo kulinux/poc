@@ -1,7 +1,5 @@
 package com.pako.fitman
 
-import java.time.Instant
-
 import com.twitter.finagle.http.Request
 import com.twitter.finatra.http.routing.HttpRouter
 import com.twitter.finatra.http.{Controller, HttpServer}
@@ -32,15 +30,18 @@ class HelloController extends Controller {
 case class Weigth (
                     user : String,
                     weigth : Int,
-                    status: Option[String],
-                    postedAt : Instant = Instant.now
+                    status: Option[String]
                   )
 
+
+object WeightController {
+  val db = mutable.Map[String, List[Weigth]]()
+}
 class WeightController extends Controller {
 
-  val db = mutable.Map[String, List[Weigth]]()
+  import WeightController.db
 
-  post("/weigths") {
+  post("/weights") {
     weight: Weigth =>
       val weigthForUser = db.get(weight.user) match {
         case Some(weigths) => weigths :+ weight
@@ -48,6 +49,11 @@ class WeightController extends Controller {
       }
       db.put(weight.user, weigthForUser)
       response.created.location(s"/weight/${weight.user}")
+  }
+
+  get("/weight/:user") {
+    request: Request =>
+      db.getOrElse(request.getParam("user"), List())
   }
 
 

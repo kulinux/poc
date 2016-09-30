@@ -20,21 +20,4 @@ class HelloControllerFeatureTest extends FeatureTest {
     )
   }
 
-  "WeightResource" should {
-    "Save the weigth when post is made" in {
-      server.httpPost(
-        path = "/weigths",
-        postBody =
-          """
-            |{
-            |"user" : "pako",
-            | "weigth": 90,
-            | "status": "Need more beer"
-            |}
-          """.stripMargin,
-        andExpect = Status.Created,
-        withLocation = "/weight/pako"
-      )
-    }
-  }
 }
