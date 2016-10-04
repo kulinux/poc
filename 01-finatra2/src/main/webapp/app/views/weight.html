@@ -1,0 +1,20 @@
+<p>This is the weight view!!.</p>
+
+<div ng-repeat="n in weights">
+  {{n}}
+</div>
+
+<div>
+  <form novalidate>
+    User <input ng-model="weight.user"/>
+    Weight <input ng-model="weight.weight"/>
+    Status <input ng-model="weight.status"/>
+
+    <input type="submit" ng-click="update(weight)"/>
+
+    <pre>
+      Weight kk {{weight}}
+    </pre>
+
+  </form>
+</div>

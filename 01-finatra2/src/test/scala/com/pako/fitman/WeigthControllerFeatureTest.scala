@@ -18,13 +18,13 @@ class WeigthControllerFeatureTest extends FeatureTest {
       """
         |{
         |"user" : "pako",
-        | "weigth": 90,
+        | "weight": 90,
         | "status": "Need more beer"
         |}
       """.stripMargin
 
       val response = server.httpPost(
-        path = "/weights",
+        path = "/server/weight",
         postBody = json,
         andExpect = Status.Created
       )
