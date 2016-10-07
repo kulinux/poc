@@ -38,3 +38,12 @@ libraryDependencies +=  "com.twitter.finatra" % "finatra-jackson_2.11" % version
 
 libraryDependencies += "org.scalatest" % "scalatest_2.11" % "2.2.4" % "test"
 libraryDependencies += "org.specs2" %% "specs2" % "2.3.12" % "test"
+
+
+libraryDependencies ++= Seq(
+  "org.apache.spark" %% "spark-core" % "1.4.1",
+  "org.apache.spark" %% "spark-streaming" % "1.4.1",
+  "org.apache.spark" %% "spark-sql" % "1.4.1",
+  "com.couchbase.client" %% "spark-connector" % "1.0.1"
+)
+

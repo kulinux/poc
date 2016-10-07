@@ -1,6 +1,7 @@
 package com.pako.fitman
 
 import com.twitter.finagle.http.Request
+import com.twitter.finagle.http.filter.Cors
 import com.twitter.finatra.http.routing.HttpRouter
 import com.twitter.finatra.http.{Controller, HttpServer}
 
@@ -12,9 +13,11 @@ object FitmanApp extends FitmanServer
 
 class FitmanServer extends HttpServer {
   override protected def configureHttp(router: HttpRouter): Unit =  {
-    router.add(new HelloController)
-    router.add(new WeightController)
-    router.add(new ResourcesController)
+    router
+      .filter(new Cors.HttpFilter(Cors.UnsafePermissivePolicy))
+      .add(new HelloController)
+      .add(new WeightController)
+      .add(new ResourcesController)
   }
 }
 

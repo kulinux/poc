@@ -9,10 +9,14 @@
  */
 angular.module('weightApp')
   .controller('WeightCtrl', ['$scope', '$resource', function ($scope, $resource) {
-    var WeightRsc = $resource('/server/weight/:id', {id: '@id'});
+    var WeightRsc = $resource('http://localhost:8888/server/weight/:id', {id: '@id'});
 
-    $scope.weights = WeightRsc.query(function () {
-    });
+    var reload = function () {
+      $scope.weights = WeightRsc.query(function () {
+      });
+    }
+
+    reload();
 
     $scope.weight = {};
 
@@ -24,7 +28,7 @@ angular.module('weightApp')
       weightRsc.weight = parseInt(weight.weight);
       weightRsc.status = weight.status;
       weightRsc.$save(function() {
-
+        reload();
       });
     };
 
