@@ -18,7 +18,11 @@ curl -v http://127.0.0.1:8091/settings/web -d port=8091 -d username=Administrato
 curl -i -u Administrator:password -X POST http://127.0.0.1:8091/settings/indexes -d 'storageMode=memory_optimized'
 
 # Load travel-sample bucket
-curl -v -u Administrator:password -X POST http://127.0.0.1:8091/sampleBuckets/install -d '["travel-sample"]'
+#curl -v -u Administrator:password -X POST http://127.0.0.1:8091/sampleBuckets/install -d '["travel-sample"]'
+
+curl -v -u Administrator:password -X POST http://127.0.0.1:8091/pools/default/buckets  \
+	-d name=finatra -d ramQuotaMB=200 -d authType=none \
+	-d replicaNumber=2 -d proxyPort=11216
 
 echo "Type: $TYPE"
 

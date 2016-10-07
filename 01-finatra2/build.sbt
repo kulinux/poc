@@ -17,7 +17,7 @@ resolvers ++= Seq(
 
 libraryDependencies += "com.twitter.finatra" % "finatra-http_2.11" % versions.finatra
 libraryDependencies +=  "com.twitter.finatra" % "finatra-jackson_2.11" % versions.finatra
-libraryDependencies += "com.twitter.finatra" % "finatra-slf4j_2.11" % versions.finatra
+//libraryDependencies += "com.twitter.finatra" % "finatra-slf4j_2.11" % versions.finatra
 libraryDependencies += "ch.qos.logback" % "logback-classic" % versions.logback
 
 libraryDependencies += "com.twitter.finatra" % "finatra-http_2.11" % versions.finatra % "test"
@@ -41,9 +41,13 @@ libraryDependencies += "org.specs2" %% "specs2" % "2.3.12" % "test"
 
 
 libraryDependencies ++= Seq(
-  "org.apache.spark" %% "spark-core" % "1.4.1",
-  "org.apache.spark" %% "spark-streaming" % "1.4.1",
-  "org.apache.spark" %% "spark-sql" % "1.4.1",
-  "com.couchbase.client" %% "spark-connector" % "1.0.1"
+  "org.apache.spark" %% "spark-core" % "1.6.1",
+  "org.apache.spark" %% "spark-streaming" % "1.6.1",
+  "org.apache.spark" %% "spark-sql" % "1.6.1",
+  "com.couchbase.client" %% "spark-connector" % "1.2.1",
+  "org.apache.spark" %% "spark-streaming-twitter" % "1.6.1",
+  "org.apache.spark" %% "spark-mllib" % "1.6.1",
+  "mysql" % "mysql-connector-java" % "5.1.37"
 )
 
+libraryDependencies += "io.argonaut" %% "argonaut" % "6.1"

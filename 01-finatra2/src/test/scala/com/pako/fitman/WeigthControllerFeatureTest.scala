@@ -28,13 +28,13 @@ class WeigthControllerFeatureTest extends FeatureTest {
         postBody = json,
         andExpect = Status.Created
       )
-      val responseGet = server.httpGetJson[List[Weigth]] (
+      val responseGet = server.httpGetJson[List[Weight]] (
         path = response.location.get,
         andExpect = Status.Ok
       )
 
     responseGet should have length 1
-    responseGet(0) should matchPattern { case fitman.Weigth("pako", _, _) => }
+    responseGet(0) should matchPattern { case fitman.Weight("pako", _, _) => }
 
   }
 }
