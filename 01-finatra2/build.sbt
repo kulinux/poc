@@ -15,6 +15,18 @@ resolvers ++= Seq(
   "Twitter Maven" at "https://maven.twttr.com"
 )
 
+
+libraryDependencies ++= Seq(
+  "org.apache.spark" %% "spark-core" % "1.6.1",
+  "org.apache.spark" %% "spark-streaming" % "1.6.1",
+  "org.apache.spark" %% "spark-sql" % "1.6.1",
+  "com.couchbase.client" %% "spark-connector" % "1.2.1",
+  "org.apache.spark" %% "spark-streaming-twitter" % "1.6.1",
+  "org.apache.spark" %% "spark-mllib" % "1.6.1",
+  "mysql" % "mysql-connector-java" % "5.1.37"
+)
+
+
 libraryDependencies += "com.twitter.finatra" % "finatra-http_2.11" % versions.finatra
 libraryDependencies +=  "com.twitter.finatra" % "finatra-jackson_2.11" % versions.finatra
 //libraryDependencies += "com.twitter.finatra" % "finatra-slf4j_2.11" % versions.finatra
@@ -40,14 +52,6 @@ libraryDependencies += "org.scalatest" % "scalatest_2.11" % "2.2.4" % "test"
 libraryDependencies += "org.specs2" %% "specs2" % "2.3.12" % "test"
 
 
-libraryDependencies ++= Seq(
-  "org.apache.spark" %% "spark-core" % "1.6.1",
-  "org.apache.spark" %% "spark-streaming" % "1.6.1",
-  "org.apache.spark" %% "spark-sql" % "1.6.1",
-  "com.couchbase.client" %% "spark-connector" % "1.2.1",
-  "org.apache.spark" %% "spark-streaming-twitter" % "1.6.1",
-  "org.apache.spark" %% "spark-mllib" % "1.6.1",
-  "mysql" % "mysql-connector-java" % "5.1.37"
-)
+//http://stackoverflow.com/questions/28086520/spark-application-throws-javax-servlet-filterregistration
 
 libraryDependencies += "io.argonaut" %% "argonaut" % "6.1"

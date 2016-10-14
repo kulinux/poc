@@ -10,7 +10,7 @@ import argonaut._, Argonaut._
 /**
   * Created by fbenitez on 07/10/2016.
   */
-class TestCouchbase extends FlatSpec with Matchers {
+class CouchbaseTest extends FlatSpec with Matchers {
 
   "Object " should "Serialize" in {
     val weight = new Weight("uno", 33, Some("tres"))
@@ -38,5 +38,6 @@ class TestCouchbase extends FlatSpec with Matchers {
     data.saveToCouchbase()
 
   }
+
 
 }

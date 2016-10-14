@@ -5,6 +5,7 @@ import argonaut.Argonaut._
 import com.couchbase.client.java.document.JsonDocument
 import com.couchbase.client.java.document.json.JsonObject
 import com.couchbase.spark._
+import com.couchbase.spark.sql._
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
@@ -41,14 +42,18 @@ class CouchbaseClient {
     val jsonDoc = sc.couchbaseGet[JsonDocument](Seq(key)).collect()
       if(jsonDoc.length > 0) {
         val parsed: Option[Weight] =
-        jsonDoc.apply(0).toString.decodeOption[Weight]
+          jsonDoc.apply(0).toString.decodeOption[Weight]
         parsed
       } else {
         None
       }
   }
 
-  //create primary index on `beer-sample`;
-  def all(key : String) = {
+  def all() = {
+    val sqlContext = new org.apache.spark.sql.SQLContext(sc)
+    val dataFrame = sqlContext.read.couchbase()
+    dataFrame.show()
+    val taken = dataFrame.take(20)
+    println("taken")
   }
 }
