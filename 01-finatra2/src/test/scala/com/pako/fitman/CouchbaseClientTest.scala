@@ -11,7 +11,7 @@ class CouchbaseClientTest extends FlatSpec with Matchers {
   "Couchbase" should "work" in {
     var client = new CouchbaseClient()
     val res = client.all()
-    println("End")
+    println("End "  + res)
   }
 
 }

@@ -1,0 +1,6 @@
+version: "2"
+services:
+  db:
+    image: finatra/app
+    ports:
+      - 8888:8888

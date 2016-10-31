@@ -22,7 +22,7 @@ class CouchbaseClient {
       .setAppName("couchbaseQuickstart") // give your app a name
       .setMaster("local[*]") // set the master to local for easy experimenting
       .set("com.couchbase.bucket.finatra", "") // open the travel-sample bucket
-      .set("com.couchbase.nodes", "192.168.99.100")
+      .set("com.couchbase.nodes", "192.168.99.101")
 
     sc = new SparkContext(cfg)
     sc
@@ -55,5 +55,6 @@ class CouchbaseClient {
     dataFrame.show()
     val taken = dataFrame.take(20)
     println("taken")
+    taken
   }
 }
