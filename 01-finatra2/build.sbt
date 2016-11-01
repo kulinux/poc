@@ -55,3 +55,6 @@ libraryDependencies += "org.specs2" %% "specs2" % "2.3.12" % "test"
 //http://stackoverflow.com/questions/28086520/spark-application-throws-javax-servlet-filterregistration
 
 libraryDependencies += "io.argonaut" %% "argonaut" % "6.1"
+
+
+
