@@ -3,9 +3,15 @@ FROM java:8
 WORKDIR /root
 
 EXPOSE 8888
-COPY *.jar /root
+COPY lib_managed /root/lib_managed
+COPY *.jar /root/lib_managed
+COPY runApp.sh /root
+
+RUN apt-get update && apt-get install -y dos2unix
 
 
-ENV CLASSPATH "/root/fitman_2.11-1.0.jar"
-CMD ["java", "-Dcom.couchbase.connectTimeout=50000", "com.pako.fitman.FitmanApp"]
+RUN dos2unix /root/runApp.sh && apt-get --purge remove -y dos2unix && rm -rf /var/lib/apt/lists/*
+
+
+CMD bash -C '/root/runApp.sh';'bash'
 

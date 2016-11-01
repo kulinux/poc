@@ -1,6 +1,8 @@
 version: "2"
 services:
-  db:
+  app:
+    stdin_open: true
+    tty: true
     image: finatra/app
     ports:
       - 8888:8888
