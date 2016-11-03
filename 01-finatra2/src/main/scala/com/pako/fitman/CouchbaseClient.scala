@@ -18,11 +18,16 @@ class CouchbaseClient {
 
   def initCouchbase() : SparkContext = {
     //It is important add the jvm property -Dcom.couchbase.connectTimeout=50000
+    val couchbaseHost = scala.util.Properties.envOrElse("couchbase", "192.168.99.100")
+
+    println("Connecting to " + couchbaseHost)
+
+
     val cfg = new SparkConf()
       .setAppName("couchbaseQuickstart") // give your app a name
       .setMaster("local[*]") // set the master to local for easy experimenting
       .set("com.couchbase.bucket.finatra", "") // open the travel-sample bucket
-      .set("com.couchbase.nodes", "192.168.99.101")
+      .set("com.couchbase.nodes", couchbaseHost)
 
     sc = new SparkContext(cfg)
     sc
