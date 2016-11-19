@@ -1,8 +1,7 @@
-package com.pako.Pi
-
+package com.pako.pi
 
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
-import akka.routing.RoundRobinRouter
+import akka.routing.RoundRobinPool
 
 
 
@@ -27,8 +26,9 @@ case class PiApproximation(pi: Double, duration : Long) extends PiMessage
 
 
 class Worker extends Actor {
-  override protected def receive: Receive = {
+  override def receive: Receive = {
     case Work(start, noElements) => {
+      println(s"worker $this - $start - $noElements")
       sender ! Result(Calculate.calculatePi(start, noElements))
     }
   }
@@ -41,7 +41,7 @@ class Master(noWorkers : Int,
   extends Actor {
 
   val workerRouter = context.actorOf(
-   Props[Worker].withRouter(RoundRobinRouter(noWorkers)), name = "workersRoute"
+   Props[Worker].withRouter(RoundRobinPool(noWorkers)), name = "workersRoute"
   )
 
 
@@ -49,9 +49,11 @@ class Master(noWorkers : Int,
   var noResult : Int = _
   val start = System.currentTimeMillis
 
-  override protected def receive: Receive = {
+  override def receive: Receive = {
     case Calculate =>
-      for( i : Int <- noMsg) workerRouter ! Work(i * noElements, noElements)
+      println("Mandan calcular, delego")
+      for( i : Int <- 0 until noMsg) workerRouter ! Work(i * noElements, noElements)
+
     case Result (value : Double) =>
       pi += value
       noResult += 1
@@ -65,7 +67,7 @@ class Master(noWorkers : Int,
 }
 
 class Listener extends Actor {
-  override protected def receive: Receive = {
+  override def receive: Receive = {
     case PiApproximation(pi : Double, duration : Long)  =>
       println("Aproximacion pi %s time %s".format(pi, duration))
   }
@@ -73,6 +75,8 @@ class Listener extends Actor {
 
 
 object Pi extends App {
+  calculate(noWorker = 4, noElements = 10000, noMsg = 10000)
+
   def calculate(noWorker : Int, noElements : Int, noMsg : Int): Unit = {
     val system = ActorSystem("PiSystem")
 
@@ -83,4 +87,5 @@ object Pi extends App {
 
     master ! Calculate
   }
+
 }

@@ -2,8 +2,15 @@ name := "Akka"
 
 version := "1.0"
 
-scalaVersion := "2.9.1"
+scalaVersion := "2.11.7"
 
-resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
 
-libraryDependencies += "com.typesafe.akka" % "akka-actor" % "2.0"
+resolvers += "Akka Snapshot Repository" at "http://repo.akka.io/snapshots/"
+
+libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.4-SNAPSHOT"
+libraryDependencies += "com.typesafe.akka" %% "akka-remote" % "2.4-SNAPSHOT"
+
+
+//mainClass in (Compile, run) := Some("com.pako.hello.Main")
+mainClass in (Compile, run) := Some("com.pako.pi.Pi")
+
